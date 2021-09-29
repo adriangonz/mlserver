@@ -6,7 +6,6 @@
 *.so
 *.dylib
 *.pyc
-bin
 
 # Mac file system
 **/.DS_Store

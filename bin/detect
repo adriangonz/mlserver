@@ -1,0 +1,5 @@
+#!/usr/bin/env bash
+
+if ! command -v pip &>/dev/null; then
+  exit 100
+fi

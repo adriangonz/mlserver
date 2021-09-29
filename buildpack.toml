@@ -1,0 +1,16 @@
+api = "0.6"
+
+[buildpack]
+  id = "seldonio/mlserver"
+  version = "0.6.0.dev0"
+
+[[stacks]]
+  id = "io.buildpacks.stacks.bionic"
+
+[metadata]
+include-files = [
+  "bin/build",
+  "bin/detect",
+  "mlserver/setup.py",
+  "buildpack.toml",
+]
