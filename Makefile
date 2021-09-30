@@ -25,8 +25,7 @@ run:
 	mlserver start \
 		./tests/testdata
 
-build: clean
-	docker build . -t ${IMAGE_NAME}:${VERSION}
+build-pypi: clean
 	python setup.py sdist bdist_wheel
 	for _runtime in ./runtimes/*; \
 	do \
@@ -36,6 +35,12 @@ build: clean
 			bdist_wheel -d ../../dist; \
 		cd ../../; \
 	done
+
+build-docker: clean
+	docker build . -t ${IMAGE_NAME}:${VERSION}
+
+
+build: | build-docker build-pypy
 
 clean:
 	rm -rf ./dist ./build

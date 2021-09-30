@@ -1,7 +1,7 @@
 api = "0.6"
 
 [buildpack]
-  id = "seldonio/mlserver"
+  id = "seldonio/mlserver-buildpack"
   version = "0.6.0.dev0"
 
 [[stacks]]
