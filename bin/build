@@ -6,34 +6,38 @@ layers_dir="$1"
 env_dir="$2/env"
 plan_path="$3"
 
-function _mlserver_layer() {
-  local _mlserver_layer = "$layers_dir/$_mlserver_layer"
+function _mlserverLayer() {
+  # TODO: If MLServer has been installed already, don't install it again
+  local _mlserver_layer="$layers_dir/mlserver"
+  local _mlserver_path="$CNB_BUILDPACK_DIR/mlserver"
 
-  # TODO: How to install the repo's source?
-  # TODO: Would need to get copied into the buildpack itself?
-  pip install mlserver
+  # Copy and install all wheels embedded in the buildpack
+  cp -r "$_mlserver_path" "$_mlserver_layer"
+  pip install "$_mlserver_layer/"*.whl
 
-  cat >"$_mlserver_layer.toml" <<-EOL
-  [types]
+  cat >"$_mlserver_layer.toml" <<EOF
+[types]
   launch = true
   cache = true
-  EOL
+EOF
 }
 
-function _launch() {
-  cat >"$layersdir/launch.toml" <<-EOL
-  [[processes]]
+function _generateLaunch() {
+  cat >"$layers_dir/launch.toml" <<-EOF
+[[processes]]
   type = "web"
   command = "mlserver start ."
-  EOL
+EOF
 }
 
-echo "---> MLServer Buildpack"
+function _main() {
+  echo "---> MLServer Buildpack"
 
-echo "---> Installing MLServer"
-_mlserver_layer
+  echo "---> Preparing MLServer layer"
+  _mlserverLayer
 
-echo "---> Generating launch.toml"
-_launch
+  echo "---> Generating launch.toml"
+  _generateLaunch
+}
 
-exit 0
+_main

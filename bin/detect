@@ -1,5 +1,24 @@
 #!/usr/bin/env bash
 
-if ! command -v pip &>/dev/null; then
-  exit 100
-fi
+set -euo pipefail
+
+env_dir="$1/env"
+plan_path="$2"
+
+function _generateBuild() {
+  # TODO: Can we read the Python version from somewhere?
+  cat >"$plan_path" <<EOF
+[[requires]]
+  name = "cpython"
+  version = "3.8.2"
+EOF
+}
+
+function _main() {
+  echo "---> Generating build.toml"
+  _generateBuild
+}
+
+_main
+
+exit 0

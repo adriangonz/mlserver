@@ -1,16 +1,18 @@
+# Use this to build buildpack image:
+# ./hack/package-buildpack.sh ./mlserver-buildpack.cnb
+
 api = "0.6"
 
 [buildpack]
   id = "seldonio/mlserver-buildpack"
   version = "0.6.0.dev0"
+  name = "Buildpack for Seldon MLServer"
 
 [[stacks]]
   id = "io.buildpacks.stacks.bionic"
 
-[metadata]
-include-files = [
-  "bin/build",
-  "bin/detect",
-  "mlserver/setup.py",
-  "buildpack.toml",
-]
+[[stacks]]
+  id = "io.paketo.stacks.base"
+
+[[stacks]]
+  id = "org.cloudfoundry.stacks.cflinuxfs3"

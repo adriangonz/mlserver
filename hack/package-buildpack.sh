@@ -32,6 +32,7 @@ _packageBuildpack() {
 
   pack buildpack package \
     $_buildpackName \
+    --format file \
     --config "$_buildpackPath/package.toml"
 }
 

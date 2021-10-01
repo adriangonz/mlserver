@@ -1,0 +1,22 @@
+# Use this to build the final image:
+# pack build numpyro-server \
+#    --builder paketobuildpacks/builder:base \
+#    --descriptor ./project.toml \
+#    --default-process web
+
+[project]
+    id = "io.seldon.mlserver.examples.numpyro-server"
+    name = "Numpyro Inference Server Example"
+    version = "0.1.0"
+
+[build]
+    exclude = [
+        "README.ipynb",
+        "README.md",
+    ]
+
+[[build.buildpacks]]
+    uri = "gcr.io/paketo-buildpacks/python"
+
+[[build.buildpacks]]
+    uri = "../../../mlserver-buildpack.cnb"

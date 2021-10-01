@@ -1,9 +1,3 @@
 [buildpack]
-uri = "."
-
-# TODO: Depend on Python buildpack
-# [[dependencies]]
-# uri = "samples/buildpacks/hello-moon"
-
-
+  uri = "."
 

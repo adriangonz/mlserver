@@ -1,0 +1,8 @@
+{
+    "name": "numpyro-divorce",
+    "implementation": "models.NumpyroModel",
+    "parameters": {
+        "uri": "./numpyro-divorce.json",
+        "version": "v0.1.0",
+    }
+}
